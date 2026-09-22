@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="从天而降的一亿颗星 - 漫画在线阅读平台。提供热门韩漫、日漫、国漫高清正版资源，包含免费章节、作者介绍及更新动态。">
+    <meta name="keywords" content="从天而降的一亿颗星,韩漫,在线漫画,免费漫画,高清漫画">
+    <title>从天而降的一亿颗星 - 热门漫画在线阅读与高清资源站</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #7c4dff;
+            --secondary-color: #00b0ff;
+            --bg-color: #0f0f13;
+            --card-bg: #1e1e24;
+            --text-main: #ffffff;
+            --text-sub: #b0b0b0;
+            --accent-hot: #ff4081;
+            --spacing-unit: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: rgba(15, 15, 19, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .search-bar {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 5px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
+            width: 200px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #2a1b4e 0%, #0f0f13 70%);
+            z-index: -2;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: fallStars 10s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes fallStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(124, 77, 255, 0.5);
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 77, 255, 0.6);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit) 60px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .section-more {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        /* Grid Layouts */
+        .manga-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-cover {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            background-color: #2a2a35;
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        .tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        .tag-free { background-color: rgba(0, 255, 128, 0.2); color: #00ff80; }
+        .tag-new { background-color: rgba(255, 64, 129, 0.2); color: #ff4081; }
+
+        /* Ranking List */
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .ranking-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .rank-num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-sub);
+            width: 40px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .rank-num.top-3 {
+            color: var(--accent-hot);
+        }
+
+        .rank-img {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .rank-views {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        /* Categories */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .cat-item {
+            background: var(--card-bg);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .cat-item:hover {
+            border-color: var(--primary-color);
+            background: rgba(124, 77, 255, 0.1);
+        }
+
+        .cat-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .cat-name {
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0c;
+            padding: 50px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #555;
+            margin-top: 50px;
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            nav ul { display: none; } /* Simplified for mobile */
+            .search-bar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">从天而降的一亿颗星</a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">最新更新</a></li>
+                    <li><a href="#">排行榜</a></li>
+                    <li><a href="#">分类</a></li>
+                    <li><a href="#">我的书架</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="搜索漫画...">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="stars"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">探索无限宇宙的浪漫</h1>
+                <p class="hero-desc">汇集全网最热门的奇幻、恋爱与冒险漫画。在“从天而降的一亿颗星”中，发现属于你的那颗星。</p>
+                <a href="#" class="btn btn-primary">开始阅读</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Categories -->
+            <section class="categories">
+                <div class="section-header">
+                    <h2 class="section-title">热门分类</h2>
+                </div>
+                <div class="category-grid">
+                    <div class="cat-item">
+                        <span class="cat-icon">❤️</span>
+                        <div class="cat-name">恋爱</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">🗡️</span>
+                        <div class="cat-name">奇幻</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">🦸</span>
+                        <div class="cat-name">动作</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">👻</span>
+                        <div class="cat-name">悬疑</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">🏫</span>
+                        <div class="cat-name">校园</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">👑</span>
+                        <div class="cat-name">宫廷</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">🏥</span>
+                        <div class="cat-name">医疗</div>
+                    </div>
+                    <div class="cat-item">
+                        <span class="cat-icon">💼</span>
+                        <div class="cat-name">职场</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trending / Ranking -->
+            <section class="trending">
+                <div class="section-header">
+                    <h2 class="section-title">本周飙升榜</h2>
+                    <a href="#" class="section-more">查看全部 &rarr;</a>
+                </div>
+                <div class="ranking-list">
+                    <div class="ranking-item">
+                        <div class="rank-num top-3">1</div>
+                        <img src="https://picsum.photos/seed/manga1/100/140" alt="Cover" class="rank-img">
+                        <div class="rank-info">
+                            <div class="rank-name">星河恋曲：星际穿越</div>
+                            <div class="rank-views">阅读量：2.3M · 12小时前更新</div>
+                        </div>
+                        <span class="tag tag-new">NEW</span>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="rank-num top-3">2</div>
+                        <img src="https://picsum.photos/seed/manga2/100/140" alt="Cover" class="rank-img">
+                        <div class="rank-info">
+                            <div class="rank-name">坠落凡间的神明</div>
+                            <div class="rank-views">阅读量：1.8M · 昨天</div>
+                        </div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="rank-num top-3">3</div>
+                        <img src="https://picsum.photos/seed/manga3/100/140" alt="Cover" class="rank-img">
+                        <div class="rank-info">
+                            <div class="rank-name">亿万星辰皆为你</div>
+                            <div class="rank-views">阅读量：1.5M · 2天前</div>
+                        </div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="rank-num">4</div>
+                        <img src="https://picsum.photos/seed/manga4/100/140" alt="Cover" class="rank-img">
+                        <div class="rank-info">
+                            <div class="rank-name">银河系漫游指南</div>
+                            <div class="rank-views">阅读量：1.2M · 3天前</div>
+                        </div>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="rank-num">5</div>
+                        <img src="https://picsum.photos/seed/manga5/100/140" alt="Cover" class="rank-img">
+                        <div class="rank-info">
+                            <div class="rank-name">流星花园：重生篇</div>
+                            <div class="rank-views">阅读量：980K · 4天前</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommended Grid -->
+            <section class="recommended">
+                <div class="section-header">
+                    <h2 class="section-title">为你推荐</h2>
+                </div>
+                <div class="manga-grid">
+                    <article class="card">
+                        <img src="https://picsum.photos/seed/rec1/200/300" alt="Manga Cover" class="card-cover">
+                        <div class="card-info">
+                            <h3 class="card-title">星空下的约定</h3>
+                            <div class="card-meta">
+                                <span>奇幻</span>
+                                <span class="tag tag-free">免费</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://picsum.photos/seed/rec2/200/300" alt="Manga Cover" class="card-cover">
+                        <div class="card-info">
+                            <h3 class="card-title">坠落的光芒</h3>
+                            <div class="card-meta">
+                                <span>科幻</span>
+                                <span>连载中</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://picsum.photos/seed/rec3/200/300" alt="Manga Cover" class="card-cover">
+                        <div class="card-info">
+                            <h3 class="card-title">亿万星辰守护者</h3>
+                            <div class="card-meta">
+                                <span>冒险</span>
+                                <span class="tag tag-new">新番</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://picsum.photos/seed/rec4/200/300" alt="Manga Cover" class="card-cover">
+                        <div class="card-info">
+                            <h3 class="card-title">银河系的恋爱物语</h3>
+                            <div class="card-meta">
+                                <span>恋爱</span>
+                                <span>完结</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://picsum.photos/seed/rec5/200/300" alt="Manga Cover" class="card-cover">
+                        <div class="card-info">
+                            <h3 class="card-title">流星雨下的秘密</h3>
+                            <div class="card-meta">
+                                <span>悬疑</span>
+                                <span class="tag tag-free">免费</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://picsum.photos/seed/rec6/200/300" alt="Manga Cover" class="card-cover">
+                        <div class="card-info">
+                            <h3 class="card-title">星际迷航：归途</h3>
+                            <div class="card-meta">
+                                <span>科幻</span>
+                                <span>连载中</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <p style="color:var(--text-sub); font-size:0.9rem;">
+                    从天而降的一亿颗星致力于为漫画爱好者提供最优质、最流畅的阅读体验。我们精选全球热门漫画，支持高清免费阅读。
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#">关于平台</a></li>
+                    <li><a href="#">版权声明</a></li>
+                    <li><a href="#">广告合作</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>热门标签</h4>
+                <ul>
+                    <li><a href="#">韩漫</a></li>
+                    <li><a href="#">日漫</a></li>
+                    <li><a href="#">国漫</a></li>
+                    <li><a href="#">纯爱</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关注我们</h4>
+                <ul>
+                    <li><a href="#">官方微博</a></li>
+                    <li><a href="#">微信公众号</a></li>
+                    <li><a href="#">粉丝群</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 从天而降的一亿颗星. All Rights Reserved. 本站仅供展示，内容版权归原作者所有。
+        </div>
+    </footer>
+
+</body>
+      </html>
