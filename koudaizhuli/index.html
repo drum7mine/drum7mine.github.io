@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="口袋助理官网提供一站式个人财务与生活管理解决方案。包含智能记账、预算规划、支出分析及云端同步功能，帮助您轻松掌控收支，实现财务自由。支持iOS与Android多端互通，数据安全可靠。">
+    <meta name="keywords" content="口袋助理,智能记账,个人理财,预算管理,财务软件,支出分析">
+    <title>口袋助理-智能记账与个人财务生活管理专家</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .section-title p {
+            color: var(--text-sub);
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-sub);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-sub);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-tag {
+            position: absolute;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag-1 { top: 10%; right: -10%; }
+        .tag-2 { bottom: 15%; left: -5%; }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-sub);
+            font-size: 15px;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 0;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            gap: 20px;
+        }
+
+        .stat-item h3 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* App Download Section */
+        .download {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+
+        .download-wrapper {
+            display: flex;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .download-content {
+            flex: 1;
+            padding: 60px;
+        }
+
+        .download-image {
+            flex: 1;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .download-image img {
+            max-width: 80%;
+            border-radius: var(--radius-md);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .download-content p {
+            color: var(--text-sub);
+            margin-bottom: 32px;
+        }
+
+        .app-stores {
+            display: flex;
+            gap: 16px;
+        }
+
+        .store-btn {
+            width: 140px;
+            height: 44px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            color: white;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .store-btn:hover {
+            background-color: #000;
+        }
+
+        .store-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-color);
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        td {
+            color: var(--text-sub);
+        }
+
+        .check-icon {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: var(--text-sub);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .faq-item.active .faq-answer {
+            padding-bottom: 20px;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: var(--text-sub);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e293b;
+            color: #94a3b8;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-brand p {
+            max-width: 300px;
+            font-size: 14px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 32px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .download-wrapper {
+                flex-direction: column;
+            }
+
+            .download-content {
+                padding: 40px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="M16 2v2"></path>
+                    <path d="M8 2v2"></path>
+                    <path d="M3 10h18"></path>
+                    <path d="M7 14h1"></path>
+                    <path d="M12 14h1"></path>
+                    <path d="M16 14h1"></path>
+                </svg>
+                口袋助理
+            </a>
+            <nav class="nav-links">
+                <a href="#features" class="active">功能特色</a>
+                <a href="#download">下载应用</a>
+                <a href="#comparison">版本对比</a>
+                <a href="#faq">常见问题</a>
+            </nav>
+            <div class="header-actions">
+                <a href="#download" class="btn btn-primary">免费下载</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>让每一笔收支<br><span>都有迹可循</span></h1>
+                <p>口袋助理是一款极简、高效的智能记账工具。自动分类、云端同步、多端互通，助您轻松掌控个人财务，告别糊涂账。</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">立即开始记账</a>
+                    <a href="#features" class="btn btn-outline">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://picsum.photos/seed/pocketapp/600/400" alt="口袋助理应用界面展示">
+                <div class="feature-tag tag-1">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    自动分类
+                </div>
+                <div class="feature-tag tag-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    云端同步
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心功能，简单好用</h2>
+                <p>专为现代生活设计的财务管理体验</p>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    </div>
+                    <h3>智能记账</h3>
+                    <p>支持语音输入、拍照识别小票、快捷记账。智能算法自动识别消费类别，减少手动操作，让记账像说话一样简单。</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    </div>
+                    <h3>预算规划</h3>
+                    <p>设定每月收支预算，实时监控消费进度。超支预警功能帮助您合理规划资金，避免冲动消费，轻松达成储蓄目标。</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
+                    </div>
+                    <h3>数据可视化</h3>
+                    <p>提供直观的图表分析，按周、月、年查看收支趋势。自定义报表，一键导出Excel，清晰呈现您的财务状况。</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3>安全加密</h3>
+                    <p>采用银行级数据加密技术，保护您的隐私安全。支持指纹解锁与密码保护，数据存储在本地，掌控权完全属于您。</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3>家庭共享</h3>
+                    <p>支持创建家庭账本，多人协作记账。实时同步家庭成员的消费记录，共同管理家庭开支，让家庭财务更透明。</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
+                    <h3>多端同步</h3>
+                    <p>手机、平板、电脑数据实时同步。随时随地记录，无论您使用哪种设备，都能获取最新的财务信息。</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h3>500万+</h3>
+                <p>活跃用户</p>
+            </div>
+            <div class="stat-item">
+                <h3>10亿+</h3>
+                <p>记账笔数</p>
+            </div>
+            <div class="stat-item">
+                <h3>4.9</h3>
+                <p>用户评分</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>数据安全</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-wrapper">
+                <div class="download-content">
+                    <h2>随时随地，轻松记账</h2>
+                    <p>无论您是刚步入社会的职场新人，还是精打细算的家庭主妇，口袋助理都能满足您的需求。支持 iOS 和 Android 双平台，数据云端同步，永不丢失。</p>
+                    <div class="app-stores">
+                        <a href="#" class="store-btn">
+                            <span class="store-icon"></span>
+                            App Store 下载
+                        </a>
+                        <a href="#" class="store-btn">
+                            <span class="store-icon">▶</span>
+                            Android 下载
+                        </a>
+                    </div>
+                </div>
+                <div class="download-image">
+                    <img src="https://picsum.photos/seed/mobileui/500/600" alt="手机端记账界面">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="comparison">
+        <div class="container">
+            <div class="section-title">
+                <h2>为什么选择口袋助理？</h2>
+                <p>对比传统记账方式，我们提供更智能的体验</p>
+            </div>
+            <div class="comparison-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>功能特性</th>
+                            <th>传统记账本</th>
+                            <th>口袋助理</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>录入方式</td>
+                            <td>手动输入，繁琐低效</td>
+                            <td class="check-icon">语音/拍照/自动识别</td>
+                        </tr>
+                        <tr>
+                            <td>数据统计</td>
+                            <td>需手动计算，易出错</td>
+                            <td class="check-icon">自动生成图表报表</td>
+                        </tr>
+                        <tr>
+                            <td>数据备份</td>
+                            <td>纸质保存，易丢失</td>
+                            <td class="check-icon">云端自动备份，多端同步</td>
+                        </tr>
+                        <tr>
+                            <td>预算管理</td>
+                            <td>无预算功能</td>
+                            <td class="check-icon">超支预警，智能规划</td>
+                        </tr>
+                        <tr>
+                            <td>隐私安全</td>
+                            <td>无加密保护</td>
+                            <td class="check-icon">本地加密，隐私保护</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>常见问题解答</h2>
+                <p>关于口袋助理的使用疑问，这里都有答案</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">口袋助理是免费使用的吗？</div>
+                    <div class="faq-answer">
+                        <p>是的，口袋助理基础版完全免费，包含核心记账功能。我们提供高级会员服务，解锁更多图表分析和家庭账本功能，您可以根据需要选择。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">数据会泄露吗？如何保证安全？</div>
+                    <div class="faq-answer">
+                        <p>我们非常重视用户隐私。所有数据均采用AES-256加密存储，且默认存储在您的设备本地。即使删除应用，只要不卸载，数据依然存在。云端同步也经过严格加密传输。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">支持哪些设备系统？</div>
+                    <div class="faq-answer">
+                        <p>目前支持 iOS 12.0 及以上版本的 iPhone 和 iPad，以及 Android 8.0 及以上的手机和平板。所有设备上的数据都会实时同步。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">如果更换手机，数据怎么迁移？</div>
+                    <div class="faq-answer">
+                        <p>非常简单。在旧手机上登录账号，开启云端同步；在新手机上下载应用并登录同一账号，数据即可自动恢复。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        </svg>
+                        口袋助理
+                    </h3>
+                    <p>致力于为用户提供最简单、最安全的个人财务管理工具。让记账成为一种习惯，让生活更有序。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>产品</h4>
+                    <ul>
+                        <li><a href="#">功能介绍</a></li>
+                        <li><a href="#">版本下载</a></li>
+                        <li><a href="#">更新日志</a></li>
+                        <li><a href="#">下载中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助</h4>
+                    <ul>
+                        <li><a href="#">使用教程</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">联系客服</a></li>
+                        <li><a href="#">意见反馈</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关于</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 口袋助理 版权所有 | 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+  </html>
