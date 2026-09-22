@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摩托小游戏-极速特技挑战与赛车模拟平台</title>
+    <meta name="description" content="摩托小游戏平台提供海量免费摩托车赛车、特技跳跃、越野挑战及模拟驾驶类网页游戏。无需下载，即点即玩，支持电脑与手机浏览器，体验速度与激情的指尖竞技。">
+    <meta name="keywords" content="摩托小游戏,赛车游戏,摩托车特技,越野摩托车,网页赛车,免费摩托车游戏">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --accent-color: #ffa502;
+            --bg-color: #f1f2f6;
+            --card-bg: #ffffff;
+            --text-main: #2f3542;
+            --text-light: #747d8c;
+            --nav-height: 70px;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-top: var(--nav-height);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* 导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span { color: var(--secondary-color); }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 600;
+            color: var(--secondary-color);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .search-box {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .search-box {
+                display: flex;
+                background: #f1f2f6;
+                padding: 5px 15px;
+                border-radius: 20px;
+                align-items: center;
+            }
+            .search-box input {
+                border: none;
+                background: transparent;
+                outline: none;
+                margin-left: 10px;
+                color: var(--text-main);
+            }
+        }
+
+        /* Hero 区域 */
+        .hero {
+            background: linear-gradient(135deg, #2f3542 0%, #1e272e 100%);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,71,87,0.2) 0%, rgba(0,0,0,0) 70%);
+            animation: pulse 10s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #dfe4ea;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.6);
+        }
+
+        /* 分类导航 */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px 5%;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 3;
+        }
+
+        .cat-tag {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .cat-tag:hover, .cat-tag.active {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* 主要内容区 */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 60px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 5px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* 游戏网格 */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 180px;
+            background: #dfe4ea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .game-card:hover .card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .game-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: #f1f2f6;
+            border-radius: 4px;
+            color: var(--text-light);
+        }
+
+        .tag.new { background: #eccc68; color: #fff; }
+        .tag.hot { background: #ff6b81; color: #fff; }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* 游戏展示区 (大图) */
+        .featured-section {
+            margin: 40px 0;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .featured-container {
+                flex-direction: row;
+            }
+        }
+
+        .featured-img {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 250px;
+        }
+
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-info {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .featured-info p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-align: center;
+            width: fit-content;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 游戏玩法说明 */
+        .guide-section {
+            background: white;
+            padding: 40px 5%;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .guide-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .guide-item h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .guide-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--secondary-color);
+            color: #a4b0be;
+            padding: 50px 5% 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            border-radius: var(--radius);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .game-frame {
+            flex: 1;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .game-placeholder {
+            text-align: center;
+            color: white;
+        }
+
+        .game-placeholder h2 { margin-bottom: 10px; color: var(--primary-color); }
+        .game-placeholder p { font-size: 0.9rem; color: #aaa; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            nav { display: none; } /* 简化移动端展示 */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+        摩托<span>游戏</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#" class="active">首页</a></li>
+            <li><a href="#racing">赛车竞速</a></li>
+            <li><a href="#tricks">特技挑战</a></li>
+            <li><a href="#sim">模拟驾驶</a></li>
+            <li><a href="#guide">新手指南</a></li>
+        </ul>
+    </nav>
+    <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="搜索摩托车游戏...">
+    </div>
+</header>
+
+<section class="hero">
+    <h1>极速特技挑战</h1>
+    <p>精选全网热门摩托小游戏，无需下载，直接体验指尖上的速度与激情。从街头赛车到极限越野，满足你对机械与速度的所有幻想。</p>
+    <a href="#games" class="hero-btn">开始游玩</a>
+</section>
+
+<div class="categories">
+    <div class="cat-tag active">全部游戏</div>
+    <div class="cat-tag">越野摩托车</div>
+    <div class="cat-tag">赛车竞速</div>
+    <div class="cat-tag">僵尸摩托</div>
+    <div class="cat-tag">跑酷游戏</div>
+    <div class="cat-tag">特技表演</div>
+</div>
+
+<main id="games">
+    <!-- 推荐游戏 -->
+    <section class="featured-section">
+        <div class="section-title">本周热门推荐</div>
+        <div class="featured-container">
+            <div class="featured-img">
+                <img src="https://picsum.photos/seed/moto1/800/600" alt="摩托车赛车游戏封面">
+            </div>
+            <div class="featured-info">
+                <h3>极速狂飙：城市夜战</h3>
+                <p>这是一款快节奏的街头赛车游戏。你需要在霓虹闪烁的城市街道中飞驰，躲避警车追捕，超越对手，挑战最高速度记录。游戏包含多辆改装机车和独特的地图场景。</p>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <span class="tag hot">火爆</span>
+                    <span class="tag">3D画面</span>
+                    <span class="tag">多人对战</span>
+                </div>
+                <a href="#" class="btn-outline" onclick="openGame('极速狂飙：城市夜战')">立即游玩</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热门游戏列表 -->
+    <section>
+        <div class="section-title">热门摩托小游戏</div>
+        <div class="game-grid">
+            <!-- 卡片 1 -->
+            <div class="game-card" onclick="openGame('僵尸摩托：末日狂奔')">
+                <div class="card-img-wrapper">
+                    <img src="https://picsum.photos/seed/zombiemoto/400/300" alt="僵尸摩托游戏">
+                    <div class="play-overlay">
+                        <div class="play-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">僵尸摩托：末日狂奔</h3>
+                    <div class="game-tags">
+                        <span class="tag hot">热门</span>
+                        <span class="tag">射击</span>
+                    </div>
+                    <div class="game-meta">
+                        <span>热度: 98%</span>
+                        <span>难度: 简单</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 2 -->
+            <div class="game-card" onclick="openGame('越野冲坡：极限挑战')">
+                <div class="card-img-wrapper">
+                    <img src="https://picsum.photos/seed/moto2/400/300" alt="越野摩托游戏">
+                    <div class="play-overlay">
+                        <div class="play-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">越野冲坡：极限挑战</h3>
+                    <div class="game-tags">
+                        <span class="tag">体育</span>
+                        <span class="tag">物理引擎</span>
+                    </div>
+                    <div class="game-meta">
+                        <span>热度: 85%</span>
+                        <span>难度: 中等</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 3 -->
+            <div class="game-card" onclick="openGame('特技摩托：空中飞人')">
+                <div class="card-img-wrapper">
+                    <img src="https://picsum.photos/seed/tricks/400/300" alt="特技摩托游戏">
+                    <div class="play-overlay">
+                        <div class="play-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">特技摩托：空中飞人</h3>
+                    <div class="game-tags">
+                        <span class="tag">技巧</span>
+                        <span class="tag">挑战</span>
+                    </div>
+                    <div class="game-meta">
+                        <span>热度: 92%</span>
+                        <span>难度: 困难</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 4 -->
+            <div class="game-card" onclick="openGame('迷你赛车：城市大逃亡')">
+                <div class="card-img-wrapper">
+                    <img src="https://picsum.photos/seed/cityracer/400/300" alt="迷你赛车游戏">
+                    <div class="play-overlay">
+                        <div class="play-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">迷你赛车：城市大逃亡</h3>
+                    <div class="game-tags">
+                        <span class="tag new">新品</span>
+                        <span class="tag">休闲</span>
+                    </div>
+                    <div class="game-meta">
+                        <span>热度: 76%</span>
+                        <span>难度: 简单</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏玩法指南 -->
+    <section class="guide-section" id="guide">
+        <div class="section-title">新手指南：如何玩好摩托小游戏</div>
+        <div class="guide-grid">
+            <div class="guide-item">
+                <h3>1. 掌握基本操作</h3>
+                <p>大多数摩托小游戏采用键盘控制。通常使用方向键或WASD控制前后移动，空格键刹车。在移动设备上，屏幕左下角为刹车，右下角为油门。</p>
+            </div>
+            <div class="guide-item">
+                <h3>2. 理解物理引擎</h3>
+                <p>摩托车游戏非常依赖物理反馈。注意重心平衡，过弯时不要猛踩刹车，否则容易侧滑翻车。利用惯性进行漂移可以获得更高的速度。</p>
+            </div>
+            <div class="guide-item">
+                <h3>3. 合理使用道具</h3>
+                <p>在竞速类游戏中，拾取地图上的加速道具（如火箭推进器）可以瞬间拉开与对手的距离。同时注意躲避路障和陷阱。</p>
+            </div>
+            <div class="guide-item">
+                <h3>4. 熟悉赛道布局</h3>
+                <p>多次练习是通关的关键。记住弯道的位置和跳跃的起跳点，这能帮助你制定最佳路线，节省时间。</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>关于摩托小游戏</h4>
+            <p style="font-size: 0.9rem; line-height: 1.8;">我们致力于为玩家提供最优质、最流畅的网页版摩托车游戏体验。无需安装，打开浏览器即可畅玩。</p>
+        </div>
+        <div class="footer-col">
+            <h4>游戏分类</h4>
+            <ul>
+                <li><a href="#">赛车竞速</a></li>
+                <li><a href="#">越野挑战</a></li>
+                <li><a href="#">特技表演</a></li>
+                <li><a href="#">僵尸题材</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>帮助中心</h4>
+            <ul>
+                <li><a href="#">如何开始游戏</a></li>
+                <li><a href="#">常见问题解答</a></li>
+                <li><a href="#">隐私政策</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2023 摩托小游戏平台. 保留所有权利. 本站所有游戏版权归原作者所有.</p>
+    </div>
+</footer>
+
+<!-- 游戏模态框 -->
+<div class="modal" id="gameModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">游戏标题</h3>
+            <button class="close-btn" onclick="closeGame()">×</button>
+        </div>
+        <div class="game-frame">
+            <div class="game-placeholder">
+                <h2>🎮 游戏加载中...</h2>
+                <p>这是一个演示页面，实际项目中此处将嵌入 iframe 或 Canvas 游戏引擎。</p>
+                <p>点击下方按钮模拟开始游戏</p>
+                <button class="btn-outline" style="margin-top: 20px;" onclick="alert('游戏已启动！\n(此为演示功能)')">启动引擎</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 简单的分类切换交互
+    const catTags = document.querySelectorAll('.cat-tag');
+    catTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            catTags.forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+        });
+    });
+
+    // 模态框控制
+    const modal = document.getElementById('gameModal');
+    const modalTitle = document.getElementById('modalTitle');
+
+    function openGame(title) {
+        modalTitle.textContent = title;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 禁止背景滚动
+    }
+
+    function closeGame() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // 点击模态框背景关闭
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeGame();
+        }
+    });
+
+    // 简单的平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+                  </html>
