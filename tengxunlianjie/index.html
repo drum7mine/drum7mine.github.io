@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腾讯连接助手PC版 - 官方下载与使用指南</title>
+    <meta name="description" content="腾讯连接助手PC版官方下载页面。提供安全稳定的网络加速服务，解决游戏卡顿、延迟高问题，支持多平台兼容，一键智能诊断网络连接状态。">
+    <meta name="keywords" content="腾讯连接助手pc版,腾讯加速器下载,腾讯连接助手,网络加速器,游戏加速">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #006eff;
+            --primary-hover: #0056cc;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --border-color: #e1e4e8;
+            --success-color: #28a745;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .download-btn-nav {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn-nav:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #006eff 0%, #00c6ff 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 48px;
+            color: var(--text-main);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: inline-block;
+            padding: 12px;
+            background: #e6f0ff;
+            border-radius: 50%;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background-color: var(--card-bg);
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .download-box {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            border: 2px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 48px;
+            background-color: #fafbfc;
+        }
+
+        .file-info {
+            margin: 24px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .file-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .file-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .file-size {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        .system-requirements {
+            margin-top: 32px;
+            text-align: left;
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .system-requirements h4 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .system-requirements ul {
+            padding-left: 20px;
+        }
+
+        .system-requirements li {
+            margin-bottom: 8px;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        /* Guide Section */
+        .guide {
+            padding: 60px 0;
+        }
+
+        .guide-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 32px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            color: var(--text-sub);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 60px 0;
+            background-color: #fff;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            margin-top: 12px;
+            color: var(--text-sub);
+            display: none;
+            padding-left: 16px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .file-info {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                腾讯连接助手
+            </div>
+            <nav class="nav-links">
+                <a href="#features">功能特性</a>
+                <a href="#download">下载安装</a>
+                <a href="#guide">使用指南</a>
+                <a href="#faq">常见问题</a>
+            </nav>
+            <a href="#download" class="download-btn-nav">立即下载</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>腾讯连接助手 PC版</h1>
+                <p>智能优化网络环境，一键解决游戏卡顿、延迟高问题。为您的网络连接保驾护航。</p>
+                <div class="hero-actions">
+                    <a href="#download" class="btn btn-primary">免费下载</a>
+                    <a href="#features" class="btn btn-outline">了解更多</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">核心功能</h2>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>智能加速</h3>
+                        <p>基于腾讯强大的节点资源，自动识别游戏类型并分配最优线路，有效降低网络延迟。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>网络诊断</h3>
+                        <p>内置专业的网络诊断工具，一键扫描本地网络环境，快速定位并修复连接故障。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>多端兼容</h3>
+                        <p>支持 Windows 全系列系统，完美适配各类主流网络游戏，兼容性好，运行稳定。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download-section">
+            <div class="container">
+                <h2 class="section-title">软件下载</h2>
+                <div class="download-box">
+                    <h3>腾讯连接助手 PC版 v1.0.0</h3>
+                    <p style="color: var(--text-sub); margin-top: 8px;">适用于 Windows 7/8/10/11 64位系统</p>
+                    
+                    <div class="file-info">
+                        <div class="file-item">
+                            <span class="file-name">腾讯连接助手.exe</span>
+                            <span class="file-size">约 45.2 MB</span>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-name">MD5 校验码</span>
+                            <span class="file-size">确认文件完整性</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn btn-primary" onclick="alert('模拟下载：请在真实环境中替换为实际下载链接'); return false;">开始下载</a>
+
+                    <div class="system-requirements">
+                        <h4>系统要求</h4>
+                        <ul>
+                            <li>操作系统：Windows 7 SP1 及以上版本 (64位)</li>
+                            <li>处理器：Intel Core i3 或同等性能处理器</li>
+                            <li>内存：2GB RAM 或以上</li>
+                            <li>硬盘：至少 100MB 可用空间</li>
+                            <li>网络：稳定的互联网连接</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guide Section -->
+        <section id="guide" class="guide">
+            <div class="container">
+                <h2 class="section-title">快速使用指南</h2>
+                <div class="guide-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>安装软件</h3>
+                            <p>运行下载的安装包，按照向导提示完成安装。安装过程中请保持网络连接正常。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>登录账号</h3>
+                            <p>启动软件后，使用腾讯QQ或微信扫码登录，以便同步加速节点设置。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>选择游戏</h3>
+                            <p>在游戏列表中选择您想要玩的游戏，软件将自动为您开启加速通道。</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>开始畅玩</h3>
+                            <p>点击“开始加速”按钮，等待状态变为绿色，即可进入游戏享受流畅体验。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">常见问题</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">腾讯连接助手是否免费使用？</div>
+                        <div class="faq-answer">基础加速功能对部分游戏提供免费时长，部分热门游戏或高级节点可能需要会员权益或付费使用。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">安装后无法启动怎么办？</div>
+                        <div class="faq-answer">请检查是否关闭了杀毒软件的拦截，或尝试以管理员身份运行安装程序。若问题依旧，请检查系统版本是否符合要求。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">加速后依然出现卡顿？</div>
+                        <div class="faq-answer">建议使用软件内的“网络诊断”功能检测本地网络环境，必要时可切换加速节点或重启路由器。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">支持哪些游戏平台？</div>
+                        <div class="faq-answer">腾讯连接助手主要支持腾讯系游戏及部分热门第三方网游，具体支持列表请参考官网更新公告。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 腾讯连接助手 PC版. 保留所有权利。</p>
+            <p>本页面为技术演示页面，非腾讯官方真实站点。</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ 交互逻辑
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                // 关闭其他已打开的项
+                document.querySelectorAll('.faq-item').forEach(child => {
+                    if (child !== parent) {
+                        child.classList.remove('active');
+                    }
+                });
+                // 切换当前项状态
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
