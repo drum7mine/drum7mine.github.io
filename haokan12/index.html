@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="好看123网址导航 - 提供优质实用的网站导航服务，收录热门影视、软件工具、游戏娱乐、生活服务及学习资源，一键直达，高效便捷。">
+    <meta name="keywords" content="好看123网址导航,网址导航,网站导航,在线导航,实用工具,影视推荐,软件下载,游戏大全">
+    <title>好看123网址导航-优质实用的网站导航与资源聚合平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+            margin-left: 1rem;
+            max-width: 200px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-inner {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 40px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 40px 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background: var(--bg-color);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary-color);
+            background: var(--card-bg);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .search-bar button:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            border-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Main Content Grid */
+        main {
+            padding-bottom: 60px;
+        }
+
+        .grid-section {
+            margin-bottom: 50px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .site-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .site-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .site-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .site-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .site-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .card-tags {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: #eff6ff;
+            color: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .card-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .visit-btn {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .visit-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Rank List Style */
+        .rank-list {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.1s;
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-item:hover {
+            background: #f8fafc;
+        }
+
+        .rank-num {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            width: 30px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .rank-item:nth-child(1) .rank-num { color: #f59e0b; }
+        .rank-item:nth-child(2) .rank-num { color: #94a3b8; }
+        .rank-item:nth-child(3) .rank-num { color: #b45309; }
+
+        .rank-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rank-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #f1f5f9;
+        }
+
+        .rank-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .rank-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                height: auto;
+                flex-direction: column;
+                padding: 15px 0;
+                gap: 15px;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .nav-menu {
+                width: 100%;
+                justify-content: space-between;
+                font-size: 0.85rem;
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-section {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">好看123<span>网址导航</span></a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="搜索您需要的网站..." aria-label="搜索网站">
+                <button type="button" aria-label="搜索按钮">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="active">首页</a>
+                <a href="#">影视娱乐</a>
+                <a href="#">软件工具</a>
+                <a href="#">游戏动漫</a>
+                <a href="#">生活服务</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>发现好网站，生活更轻松</h1>
+                <p>好看123网址导航为您精选全网优质资源，涵盖影视、软件、游戏、学习等多个领域，告别无效搜索，一键直达。</p>
+                <div class="quick-actions">
+                    <a href="#entertainment" class="btn btn-primary">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        浏览推荐
+                    </a>
+                    <a href="#" class="btn btn-outline">提交收录</a>
+                    <a href="#" class="btn btn-outline">帮助中心</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Entertainment Section -->
+        <section id="entertainment" class="grid-section container">
+            <div class="section-title">
+                <h2>影视娱乐</h2>
+                <a href="#" style="font-size: 0.9rem; color: var(--primary-color);">查看更多 &rarr;</a>
+            </div>
+            <div class="category-grid">
+                <!-- Card 1 -->
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎬</div>
+                        <div class="site-info">
+                            <h3>流媒体在线影院</h3>
+                            <p>高清免费电影、电视剧、动漫资源在线观看与下载。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">高清</span>
+                        <span class="tag">免费</span>
+                        <span class="tag">更新快</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎵</div>
+                        <div class="site-info">
+                            <h3>在线音乐电台</h3>
+                            <p>海量无损音乐、流行榜单、电台直播及音乐社区。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">无损音质</span>
+                        <span class="tag">歌单</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎮</div>
+                        <div class="site-info">
+                            <h3>游戏攻略中心</h3>
+                            <p>热门游戏资讯、新手攻略、装备图鉴及玩家论坛。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">攻略</span>
+                        <span class="tag">资讯</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">📚</div>
+                        <div class="site-info">
+                            <h3>有声读物平台</h3>
+                            <p>听书、广播剧、相声评书，解放双眼，随时随地聆听。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">听书</span>
+                        <span class="tag">音频</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Software Tools Section -->
+        <section class="grid-section container">
+            <div class="section-title">
+                <h2>实用工具</h2>
+                <a href="#" style="font-size: 0.9rem; color: var(--primary-color);">查看更多 &rarr;</a>
+            </div>
+            <div class="category-grid">
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">💻</div>
+                        <div class="site-info">
+                            <h3>绿色软件下载站</h3>
+                            <p>提供安全无毒的软件下载，包含装机必备、效率工具等。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">安全</span>
+                        <span class="tag">绿色</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎨</div>
+                        <div class="site-info">
+                            <h3>设计素材库</h3>
+                            <p>PNG素材、PSD模板、免抠图、字体下载一站式服务。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">素材</span>
+                        <span class="tag">设计</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🛠️</div>
+                        <div class="site-info">
+                            <h3>在线工具箱</h3>
+                            <p>图片压缩、格式转换、二维码生成、在线文档编辑等。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">在线</span>
+                        <span class="tag">便捷</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Top Sites Ranking -->
+        <section class="container">
+            <div class="section-title">
+                <h2>热门推荐</h2>
+            </div>
+            <div class="rank-list">
+                <div class="rank-item">
+                    <span class="rank-num">1</span>
+                    <div class="rank-info">
+                        <div class="rank-icon"></div>
+                        <div>
+                            <div class="rank-name">综合搜索引擎</div>
+                            <div class="rank-desc">全网信息检索，精准直达</div>
+                        </div>
+                    </div>
+                    <a href="#" class="visit-btn">访问</a>
+                </div>
+                <div class="rank-item">
+                    <span class="rank-num">2</span>
+                    <div class="rank-info">
+                        <div class="rank-icon"></div>
+                        <div>
+                            <div class="rank-name">社交媒体平台</div>
+                            <div class="rank-desc">热点资讯，互动交流</div>
+                        </div>
+                    </div>
+                    <a href="#" class="visit-btn">访问</a>
+                </div>
+                <div class="rank-item">
+                    <span class="rank-num">3</span>
+                    <div class="rank-info">
+                        <div class="rank-icon"></div>
+                        <div>
+                            <div class="rank-name">视频直播平台</div>
+                            <div class="rank-desc">实时直播，精彩无限</div>
+                        </div>
+                    </div>
+                    <a href="#" class="visit-btn">访问</a>
+                </div>
+                <div class="rank-item">
+                    <span class="rank-num">4</span>
+                    <div class="rank-info">
+                        <div class="rank-icon"></div>
+                        <div>
+                            <div class="rank-name">在线购物商城</div>
+                            <div class="rank-desc">海量商品，正品保障</div>
+                        </div>
+                    </div>
+                    <a href="#" class="visit-btn">访问</a>
+                </div>
+                <div class="rank-item">
+                    <span class="rank-num">5</span>
+                    <div class="rank-info">
+                        <div class="rank-icon"></div>
+                        <div>
+                            <div class="rank-name">新闻资讯门户</div>
+                            <div class="rank-desc">时事热点，深度报道</div>
+                        </div>
+                    </div>
+                    <a href="#" class="visit-btn">访问</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life & Study Section -->
+        <section class="grid-section container">
+            <div class="section-title">
+                <h2>生活与学习</h2>
+                <a href="#" style="font-size: 0.9rem; color: var(--primary-color);">查看更多 &rarr;</a>
+            </div>
+            <div class="category-grid">
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">📖</div>
+                        <div class="site-info">
+                            <h3>在线学习平台</h3>
+                            <p>职业技能培训、公开课、在线考试及知识分享社区。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">技能</span>
+                        <span class="tag">课程</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🛒</div>
+                        <div class="site-info">
+                            <h3>生活服务大全</h3>
+                            <p>快递查询、天气查询、地图导航、美食团购等实用服务。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">生活</span>
+                        <span class="tag">便民</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+
+                <article class="site-card">
+                    <div class="card-header">
+                        <div class="card-icon">🚌</div>
+                        <div class="site-info">
+                            <h3>出行交通指南</h3>
+                            <p>火车票务、机票查询、实时公交、长途客车时刻表。</p>
+                        </div>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">出行</span>
+                        <span class="tag">票务</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="visit-btn">立即访问</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">好看123<span>网址导航</span></div>
+                    <p style="font-size: 0.9rem; line-height: 1.8;">致力于为用户提供最便捷、最安全的网址导航服务。收录全网优质网站，拒绝广告插件，只做有价值的导航。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">提交网站</a></li>
+                        <li><a href="#">免责声明</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>热门分类</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">影视娱乐</a></li>
+                        <li><a href="#">软件下载</a></li>
+                        <li><a href="#">游戏动漫</a></li>
+                        <li><a href="#">生活服务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系我们</h4>
+                    <ul class="footer-links">
+                        <li>邮箱：contact@haokan123.com</li>
+                        <li>合作：bd@haokan123.com</li>
+                        <li>地址：中国互联网创新产业园</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 好看123网址导航 版权所有. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+  </html>
